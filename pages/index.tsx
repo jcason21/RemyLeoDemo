@@ -3,9 +3,7 @@ import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import { useRouter } from "next/router";
 
-// Define a motion-enabled div or img wrapper
-const MotionImage = motion.img;
-
+// No need for MotionImage; use motion directly on img
 export default function HomePage() {
   const router = useRouter();
 
@@ -14,11 +12,8 @@ export default function HomePage() {
       <div className="relative mb-6">
         <div className="absolute inset-0 blur-2xl opacity-40 bg-[#D4AF37] rounded-full animate-ping"></div>
         
-        {/* Use MotionImage here */}
-        <MotionImage
-          src="/logo.png"
-          alt="Remy Leo Logo"
-          className="w-48 h-48"
+        {/* Use motion.div and standard img */}
+        <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{
             opacity: 1,
@@ -34,7 +29,13 @@ export default function HomePage() {
             ease: "easeInOut",
             repeat: Infinity,
           }}
-        />
+        >
+          <img
+            src="/logo.png"
+            alt="Remy Leo Logo"
+            className="w-48 h-48"
+          />
+        </motion.div>
       </div>
       
       <h1 className="text-4xl md:text-6xl font-bold text-[#D4AF37] text-center mb-4">
