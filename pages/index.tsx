@@ -1,7 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Button } from "../components/ui/button"; // Ensure this path is correct
+import { Button } from "../components/ui/button";
 import { useRouter } from "next/router";
+
+// Define a motion-enabled div or img wrapper
+const MotionImage = motion.img;
 
 export default function HomePage() {
   const router = useRouter();
@@ -11,8 +14,8 @@ export default function HomePage() {
       <div className="relative mb-6">
         <div className="absolute inset-0 blur-2xl opacity-40 bg-[#D4AF37] rounded-full animate-ping"></div>
         
-        {/* Animated logo */}
-        <motion.img
+        {/* Use MotionImage here */}
+        <MotionImage
           src="/logo.png"
           alt="Remy Leo Logo"
           className="w-48 h-48"
@@ -33,18 +36,15 @@ export default function HomePage() {
           }}
         />
       </div>
-
-      {/* Title */}
+      
       <h1 className="text-4xl md:text-6xl font-bold text-[#D4AF37] text-center mb-4">
         The Future is Stitched & Scripted
       </h1>
       
-      {/* Description */}
       <p className="text-lg text-gray-300 text-center max-w-xl mb-10">
         Remy Leo is where creative technology meets wearable storytelling. Choose your path — build digital tools or wear the message.
       </p>
       
-      {/* Buttons */}
       <div className="flex gap-4">
         <Button
           variant="outline"
