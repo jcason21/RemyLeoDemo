@@ -1,18 +1,20 @@
+// pages/index.tsx
+"use client";
+
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Button } from "../components/ui/button";
 import { useRouter } from "next/router";
 
 const MotionImage = motion(Image);
 
-export default function HomePage() {
+export default function Home() {
   const router = useRouter();
 
   return (
     <main className="min-h-screen bg-[#1A1A1A] flex flex-col justify-center items-center text-white px-6">
-      <div className="relative mb-6">
-        <div className="absolute inset-0 blur-2xl opacity-40 bg-[#D4AF37] rounded-full animate-ping"></div>
+      <div className="relative">
+        <div className="absolute inset-0 blur-2xl opacity-40 bg-[#D4AF37] rounded-full animate-ping" />
         <MotionImage
           src="/logo.png"
           alt="Remy Leo Logo"
@@ -36,29 +38,16 @@ export default function HomePage() {
           }}
         />
       </div>
-      <h1 className="text-4xl md:text-6xl font-bold text-[#D4AF37] text-center mb-4">
-        The Future is Stitched & Scripted
-      </h1>
-      <p className="text-lg text-gray-300 text-center max-w-xl mb-10">
-        Remy Leo is where creative technology meets wearable storytelling.
-        Choose your path — build digital tools or wear the message.
+      <h1 className="text-4xl mt-6 font-bold text-center">Welcome to Remy Leo</h1>
+      <p className="text-lg text-center mt-2 max-w-xl">
+        The fusion of fashion, function, and futuristic design.
       </p>
-      <div className="flex gap-4">
-        <Button
-          variant="outline"
-          className="bg-[#D4AF37] text-[#1A1A1A] px-6 py-3 text-lg rounded-2xl shadow-xl hover:opacity-90"
-          onClick={() => router.push("/studio")}
-        >
-          Build with Me
-        </Button>
-        <Button
-          variant="outline"
-          className="border-[#D4AF37] text-[#D4AF37] px-6 py-3 text-lg rounded-2xl hover:bg-[#2f2f2f]"
-          onClick={() => router.push("/clothing")}
-        >
-          Wear the Message
-        </Button>
-      </div>
+      <button
+        onClick={() => router.push("/studio")}
+        className="mt-8 px-6 py-3 bg-[#D4AF37] text-black font-semibold rounded-full hover:bg-yellow-500 transition"
+      >
+        Enter Studio
+      </button>
     </main>
   );
 }
