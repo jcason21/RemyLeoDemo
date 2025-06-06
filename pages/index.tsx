@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Button } from "../components/ui/button";
 import { useRouter } from "next/router";
 
-// Wrap Next.js Image with motion
 const MotionImage = motion(Image);
 
 export default function HomePage() {
@@ -37,18 +36,17 @@ export default function HomePage() {
           }}
         />
       </div>
-
       <h1 className="text-4xl md:text-6xl font-bold text-[#D4AF37] text-center mb-4">
         The Future is Stitched & Scripted
       </h1>
       <p className="text-lg text-gray-300 text-center max-w-xl mb-10">
-        Remy Leo is where creative technology meets wearable storytelling. Choose your path — build digital tools or wear the message.
+        Remy Leo is where creative technology meets wearable storytelling.
+        Choose your path — build digital tools or wear the message.
       </p>
-
       <div className="flex gap-4">
         <Button
           variant="outline"
-          className="bg-[#D4AF37] text-[#D4AF37] px-6 py-3 text-lg rounded-2xl shadow-xl hover:opacity-90"
+          className="bg-[#D4AF37] text-[#1A1A1A] px-6 py-3 text-lg rounded-2xl shadow-xl hover:opacity-90"
           onClick={() => router.push("/studio")}
         >
           Build with Me
