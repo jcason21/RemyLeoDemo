@@ -1,9 +1,11 @@
 // pages/index.tsx
+
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
+// Creating a Motion-enabled version of the Next.js Image component
 const MotionImage = motion(Image);
 
 export default function Home() {
@@ -34,11 +36,15 @@ export default function Home() {
         transition={{ duration: 2, repeat: Infinity }}
       />
 
+      {/* Page title */}
       <h1 className="mt-12 text-4xl font-bold">Welcome to Remy Leo</h1>
+      
+      {/* Page description */}
       <p className="mt-4 max-w-xl text-center text-lg text-gray-300">
         The future of streetwear meets wearable tech.
       </p>
 
+      {/* Button to explore the studio */}
       <button
         onClick={() => router.push("/studio")}
         className="mt-8 rounded bg-[#D4AF37] px-6 py-3 font-semibold text-black hover:bg-[#b68f2f] transition"
