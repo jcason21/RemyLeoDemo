@@ -1,10 +1,8 @@
 import React from "react";
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
-
-const MotionDiv: React.FC<HTMLMotionProps<"div">> = motion.div;
 
 export default function StudioPage() {
   const router = useRouter();
@@ -57,7 +55,7 @@ export default function StudioPage() {
           </h2>
           <div className="grid gap-6 md:grid-cols-2">
             {projects.map((project, i) => (
-              <MotionDiv
+              <motion.div
                 key={project.title}
                 className="bg-[#1A1A1A] p-6 rounded-2xl shadow-xl flex flex-col justify-between"
                 initial={{ opacity: 0, y: 40 }}
@@ -87,7 +85,7 @@ export default function StudioPage() {
                 >
                   View Project
                 </Button>
-              </MotionDiv>
+              </motion.div>
             ))}
           </div>
         </section>
