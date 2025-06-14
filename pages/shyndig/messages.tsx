@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import ShyndigNavbar from "../../components/ShyndigNavbar";
-import ShyndigLayout from "../../components/ShyndigLayout";
 import { useMockUser } from "../../lib/mockUser";
 
 const mockUserPrefs = {
