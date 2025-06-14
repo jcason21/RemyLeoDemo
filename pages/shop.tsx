@@ -41,7 +41,7 @@ const products = [
 const sizes = ["S", "M", "L", "XL", "2XL", "3XL"];
 
 export default function ShopPage() {
-  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedProduct, setSelectedProduct] = useState<typeof products[0] | null>(null);
 
   return (
     <>
@@ -58,7 +58,12 @@ export default function ShopPage() {
 
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-7xl mx-auto">
           {products.map((product) => (
-            <Dialog key={product.id} onOpenChange={(open) => !open && setSelectedProduct(null)}>
+            <Dialog
+              key={product.id}
+              onOpenChange={(open) => {
+                if (!open) setSelectedProduct(null);
+              }}
+            >
               <DialogTrigger asChild>
                 <button
                   onClick={() => setSelectedProduct(product)}
@@ -85,7 +90,7 @@ export default function ShopPage() {
                 </button>
               </DialogTrigger>
 
-              <DialogContent className="space-y-6">
+              <DialogContent className="bg-[#0E0E0E] text-white max-w-2xl w-full p-6 rounded-2xl space-y-6">
                 {selectedProduct && (
                   <>
                     <h2 className="text-2xl font-bold text-[#D4AF37]">
