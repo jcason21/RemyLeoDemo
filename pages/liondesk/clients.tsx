@@ -1,7 +1,7 @@
 import React from "react";
 import LiondeskNavbar from "../../components/LiondeskNavbar";
 import { Button } from "../../components/ui/button";
-import { Pencil, Trash2, Eye, Send, FileText } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 
 export default function ClientsPage() {
   const clients = [
@@ -52,15 +52,15 @@ export default function ClientsPage() {
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
                       <Button
-                        variant="ghost"
-                        className="text-[#E0B84E] hover:underline px-3 flex items-center gap-1"
+                        variant="outline"
+                        className="border-none bg-transparent text-[#E0B84E] hover:underline px-3 flex items-center gap-1"
                       >
                         <Pencil className="w-4 h-4" />
                         Edit
                       </Button>
                       <Button
-                        variant="ghost"
-                        className="text-red-400 hover:underline px-3 flex items-center gap-1"
+                        variant="outline"
+                        className="border-none bg-transparent text-red-400 hover:underline px-3 flex items-center gap-1"
                       >
                         <Trash2 className="w-4 h-4" />
                         Delete
