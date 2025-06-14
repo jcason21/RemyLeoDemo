@@ -18,7 +18,7 @@ export default function StudioPage() {
     {
       title: "Liondesk",
       description:
-        "A clean, modern CRM system built for freelancers and creatives to manage clients, invoices, and time effortlessly.",
+        "A lightweight CRM for freelancers and creatives—track clients, invoices, and appointments in one place.",
       link: "/liondesk",
       internal: true,
     },
@@ -42,7 +42,7 @@ export default function StudioPage() {
             What I Offer
           </h2>
           <ul className="grid gap-4 text-gray-200">
-            <li>⚙️ Full-Stack Web App Development (MERN)</li>
+            <li>⚙️ Full-Stack Web App Development </li>
             <li>🎨 Clean UI/UX Design aligned with your brand</li>
             <li>🚀 Brand Identity + MVP Launch Support</li>
             <li>📊 User Analytics & Conversion Tracking</li>
@@ -99,12 +99,29 @@ export default function StudioPage() {
           </p>
           <Button
             variant="outline"
-            className="bg-[#D4AF37] text-[#0E0E0E] font-semibold px-6 py-3 rounded-2xl text-lg shadow-lg hover:opacity-90"
+            className="bg-[#D4AF37] text-[#D4AF37] font-semibold px-6 py-3 rounded-2xl text-lg shadow-lg hover:opacity-90"
             onClick={() => router.push("/contact")}
           >
             Contact Me
           </Button>
         </section>
+         {/* Footer */}
+      <footer className="w-full bg-[#111111] text-gray-200 text-sm text-center py-6 mt-12 border-t border-[#D4AF37]">
+        <div className="container mx-auto px-4">
+          <p>© {new Date().getFullYear()} Remy Leo. All rights reserved.</p>
+          <div className="mt-2 flex justify-center gap-6">
+            <button onClick={() => router.push("/studio")} className="hover:text-[#D4AF37] transition-colors">
+              Studio
+            </button>
+            <button onClick={() => router.push("/clothing")} className="hover:text-[#D4AF37] transition-colors">
+              Apparel
+            </button>
+            <button onClick={() => router.push("/lore")} className="hover:text-[#D4AF37] transition-colors">
+              Origin Story
+            </button>
+          </div>
+        </div>
+      </footer>
       </main>
     </>
   );

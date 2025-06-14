@@ -31,20 +31,19 @@ export default function LiondeskPage() {
       <main className="min-h-screen bg-[#0D3B66] text-[#FAF0CA] px-8 py-16 max-w-7xl mx-auto">
         <section className="mb-16 text-center max-w-3xl mx-auto">
           <h1 className="text-5xl font-extrabold mb-4 drop-shadow-lg">
-            Liondesk CRM
+            LionDesk CRM
           </h1>
           <p className="text-lg text-[#F0E8D8] mb-8 leading-relaxed">
             A powerful client management platform designed for smooth scheduling,
-            invoicing, and keeping your business organized — built with MongoDB,
-            Express, and React.
+            invoicing, and keeping your business organized.
           </p>
-          <Button
-            variant="solid"
-            className="bg-[#E0B84E] text-[#0D3B66] font-bold px-8 py-3 rounded-xl shadow-lg hover:bg-[#c2a739] transition-colors"
-            onClick={() => router.push("/contact")}
+          {/*<Button
+            variant="outline"
+            className="bg-[#E0B84E] text-[#E0B84E] font-bold px-8 py-3 rounded-xl shadow-lg hover:bg-[#c2a739] hover:text-[#0D3B66] transition-colors"
+            onClick={() => router.push("liondesk/contact")}
           >
             Request Demo Access
-          </Button>
+          </Button>*/}
         </section>
 
         <section>

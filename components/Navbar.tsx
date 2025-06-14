@@ -17,9 +17,10 @@ export default function Navbar() {
 
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-6">
+          <Link href="/about" className="hover:text-[#D4AF37]">About</Link>
           <Link href="/clothing" className="hover:text-[#D4AF37]">Clothing</Link>
-          <Link href="/preorder" className="hover:text-[#D4AF37]">Preorder</Link>
           <Link href="/lore" className="hover:text-[#D4AF37]">Lore</Link>
+          <Link href="/preorder" className="hover:text-[#D4AF37]">Preorder</Link>
           <Link href="/studio" className="hover:text-[#D4AF37]">Studio</Link>
 
         </div>
