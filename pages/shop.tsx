@@ -58,35 +58,34 @@ export default function ShopPage() {
 
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-7xl mx-auto">
           {products.map((product) => (
-            <Dialog key={product.id}>
-  <DialogTrigger asChild>
-    <button
-      onClick={() => setSelectedProduct(product)}
-      className="bg-[#1A1A1A] p-6 rounded-2xl shadow-xl w-full text-left hover:scale-105 transition-transform duration-300"
-    >
-      <div className="relative w-full aspect-[4/5] mb-4 rounded-xl overflow-hidden">
-        <Image
-          src={product.image}
-          alt={product.name}
-          fill
-          className="object-cover"
-        />
-      </div>
-      <h2 className="text-xl font-bold text-[#D4AF37]">{product.name}</h2>
-      <p className="text-white font-semibold">{product.price}</p>
-      <div className="mt-4">
-        <Button
-          variant="outline"
-          className="w-full border-[#D4AF37] text-[#D4AF37] hover:bg-[#2f2f2f]"
-        >
-          Preorder
-        </Button>
-      </div>
-    </button>
-  </DialogTrigger>
+            <Dialog key={product.id} onOpenChange={(open) => !open && setSelectedProduct(null)}>
+              <DialogTrigger asChild>
+                <button
+                  onClick={() => setSelectedProduct(product)}
+                  className="bg-[#1A1A1A] p-6 rounded-2xl shadow-xl w-full text-left hover:scale-105 transition-transform duration-300"
+                >
+                  <div className="relative w-full aspect-[4/5] mb-4 rounded-xl overflow-hidden">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <h2 className="text-xl font-bold text-[#D4AF37]">{product.name}</h2>
+                  <p className="text-white font-semibold">{product.price}</p>
+                  <div className="mt-4">
+                    <Button
+                      variant="outline"
+                      className="w-full border-[#D4AF37] text-[#D4AF37] hover:bg-[#2f2f2f]"
+                    >
+                      Preorder
+                    </Button>
+                  </div>
+                </button>
+              </DialogTrigger>
 
-
-              <DialogContent className="bg-[#0E0E0E] text-white max-w-2xl w-full p-6 rounded-2xl space-y-6">
+              <DialogContent className="space-y-6">
                 {selectedProduct && (
                   <>
                     <h2 className="text-2xl font-bold text-[#D4AF37]">
