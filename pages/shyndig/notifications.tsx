@@ -1,6 +1,5 @@
 import ShyndigNavbar from "../../components/ShyndigNavbar";
 import Link from "next/link";
-import ShyndigLayout from "../../components/ShyndigLayout";
 
 const notifications = [
   {
