@@ -1,6 +1,6 @@
 import ShyndigNavbar from "../../components/ShyndigNavbar";
 import Link from "next/link";
-import ShyndigLayout from "../../components/ShyndigLayout";
+//
 
 const topCurators = [
   { name: "Alex G", followers: 1200 },
