@@ -1,10 +1,12 @@
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/router"; // ✅ Add this
 import { Button } from "../components/ui/button";
 import Countdown from "../components/Countdown";
 import Navbar from "../components/Navbar";
 
 export default function PreorderPage() {
+ const router = useRouter(); // ✅ And this
   return (
     <>
       <Navbar />
