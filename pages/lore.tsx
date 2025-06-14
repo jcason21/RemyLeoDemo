@@ -1,3 +1,10 @@
+import React from "react";
+import Image from "next/image";
+import Navbar from "../components/Navbar";
+import { motion } from "framer-motion";
+import Head from "next/head";
+import { useRouter } from "next/router"; // ✅ Required for router to work
+
 export default function LorePage() {
   const router = useRouter(); // ✅ FIXED
 
