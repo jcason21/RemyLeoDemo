@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ShyndigNavbar from "../../components/ShyndigNavbar";
-import ShyndigLayout from "../../components/ShyndigLayout";
 
 const fakeUser = {
   username: "NiaD",

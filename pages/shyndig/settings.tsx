@@ -1,6 +1,5 @@
 import { useState } from "react";
 import ShyndigNavbar from "../../components/ShyndigNavbar";
-import ShyndigLayout from "../../components/ShyndigLayout";
 
 export default function SettingsPage() {
   const [connected, setConnected] = useState({
