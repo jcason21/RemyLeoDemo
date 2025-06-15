@@ -10,27 +10,27 @@ const panels = [
     caption: "The beginning of the journey in a future dystopia.",
   },
   {
-    src: "/images/lore2.jpg",
+    src: "/images/panel2.png",
     alt: "Remy Leo Origin Panel 2",
     caption: "The guardian discovers his powers.",
   },
   {
-    src: "/images/lore3.jpg",
+    src: "/images/panel3.png",
     alt: "Remy Leo Origin Panel 3",
     caption: "A glimpse into the survival-adaptive force field.",
   },
   {
-    src: "/images/lore4.jpg",
+    src: "/images/panel4.png",
     alt: "Remy Leo Origin Panel 4",
     caption: "Thrown back through time, stranded in a new world.",
   },
   {
-    src: "/images/lore5.jpg",
+    src: "/images/panel5.png",
     alt: "Remy Leo Origin Panel 5",
     caption: "The force field mimics attacks to protect and empower.",
   },
   {
-    src: "/images/lore6.jpg",
+    src: "/images/panel6.png",
     alt: "Remy Leo Origin Panel 6",
     caption: "The hidden message behind the Remy Leo apparel.",
   },
