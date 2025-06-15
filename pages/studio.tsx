@@ -37,18 +37,66 @@ export default function StudioPage() {
           design.
         </p>
 
-        <section className="mb-16">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            What I Offer
+        {/* Updated What I Offer Section with pricing & packages */}
+        <section className="mb-16 max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-[#D4AF37] mb-8 text-center">
+            💼 What I Offer
           </h2>
-          <ul className="grid gap-4 text-gray-200">
-            <li>⚙️ Full-Stack Web App Development </li>
-            <li>🎨 Clean UI/UX Design aligned with your brand</li>
-            <li>🚀 Brand Identity + MVP Launch Support</li>
-            <li>📊 User Analytics & Conversion Tracking</li>
-          </ul>
+
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {/* Starter Brand Site */}
+            <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 space-y-4">
+              <h3 className="text-2xl font-semibold">🔹 Starter Brand Site</h3>
+              <p className="text-lg text-gray-400">$499 – Perfect for solo creators or simple portfolios.</p>
+              <ul className="list-disc list-inside space-y-1 text-sm text-gray-300">
+                <li>1–3 Responsive Pages</li>
+                <li>Mobile-first Custom Design</li>
+                <li>Contact Form + Email Setup</li>
+                <li>Hosting & Basic SEO</li>
+              </ul>
+              <p className="text-xs text-gray-500">Delivery: 5–7 days</p>
+            </div>
+
+            {/* MVP Launch Package */}
+            <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 space-y-4">
+              <h3 className="text-2xl font-semibold">⚡ MVP Launch Package</h3>
+              <p className="text-lg text-gray-400">Starting at $999 – For startups and product launches.</p>
+              <ul className="list-disc list-inside space-y-1 text-sm text-gray-300">
+                <li>Up to 6 Custom Pages</li>
+                <li>Frontend + Backend (MERN/Next.js)</li>
+                <li>User Auth & Dashboard</li>
+                <li>Database + Analytics</li>
+              </ul>
+              <p className="text-xs text-gray-500">Delivery: 10–14 days</p>
+            </div>
+
+            {/* Custom Web App */}
+            <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 space-y-4">
+              <h3 className="text-2xl font-semibold">🚀 Custom Web App / SaaS</h3>
+              <p className="text-lg text-gray-400">Inquire for Quote – Tailored builds for unique needs.</p>
+              <ul className="list-disc list-inside space-y-1 text-sm text-gray-300">
+                <li>Booking / E-Commerce / AI</li>
+                <li>Stripe or API Integrations</li>
+                <li>Admin Panels + Dashboards</li>
+                <li>Advanced Features & Automation</li>
+              </ul>
+              <p className="text-xs text-gray-500">Custom quote based on scope</p>
+            </div>
+          </div>
+
+          {/* Add-ons */}
+          <div className="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+            <h4 className="text-xl font-semibold mb-2">✨ Add-Ons</h4>
+            <ul className="grid gap-1 text-sm text-gray-300 sm:grid-cols-2 md:grid-cols-4">
+              <li>🎨 Logo + Brand Kit – $199</li>
+              <li>🔧 Monthly Maintenance – $99/mo</li>
+              <li>📬 Email/Newsletter Setup – $149</li>
+              <li>✍️ Copywriting – $100/page</li>
+            </ul>
+          </div>
         </section>
 
+        {/* Sample Projects Section */}
         <section className="mb-16">
           <h2 className="text-2xl font-semibold text-white mb-4">
             Sample Projects
@@ -105,23 +153,33 @@ export default function StudioPage() {
             Contact Me
           </Button>
         </section>
-         {/* Footer */}
-      <footer className="w-full bg-[#111111] text-gray-200 text-sm text-center py-6 mt-12 border-t border-[#D4AF37]">
-        <div className="container mx-auto px-4">
-          <p>© {new Date().getFullYear()} Remy Leo. All rights reserved.</p>
-          <div className="mt-2 flex justify-center gap-6">
-            <button onClick={() => router.push("/studio")} className="hover:text-[#D4AF37] transition-colors">
-              Studio
-            </button>
-            <button onClick={() => router.push("/clothing")} className="hover:text-[#D4AF37] transition-colors">
-              Apparel
-            </button>
-            <button onClick={() => router.push("/lore")} className="hover:text-[#D4AF37] transition-colors">
-              Origin Story
-            </button>
+
+        {/* Footer */}
+        <footer className="w-full bg-[#111111] text-gray-200 text-sm text-center py-6 mt-12 border-t border-[#D4AF37]">
+          <div className="container mx-auto px-4">
+            <p>© {new Date().getFullYear()} Remy Leo. All rights reserved.</p>
+            <div className="mt-2 flex justify-center gap-6">
+              <button
+                onClick={() => router.push("/studio")}
+                className="hover:text-[#D4AF37] transition-colors"
+              >
+                Studio
+              </button>
+              <button
+                onClick={() => router.push("/clothing")}
+                className="hover:text-[#D4AF37] transition-colors"
+              >
+                Apparel
+              </button>
+              <button
+                onClick={() => router.push("/lore")}
+                className="hover:text-[#D4AF37] transition-colors"
+              >
+                Origin Story
+              </button>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
       </main>
     </>
   );
