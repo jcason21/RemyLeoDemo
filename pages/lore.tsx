@@ -1,36 +1,52 @@
-import React from "react";
+// pages/lore.tsx
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Navbar from "../components/Navbar";
-import { motion } from "framer-motion";
-import Head from "next/head";
-import { useRouter } from "next/router"; // ✅ Required for router to work
+
+const panels = [
+  {
+    src: "/images/lore1.jpg",
+    alt: "Remy Leo Origin Panel 1",
+    caption: "The beginning of the journey in a future dystopia.",
+  },
+  {
+    src: "/images/lore2.jpg",
+    alt: "Remy Leo Origin Panel 2",
+    caption: "The guardian discovers his powers.",
+  },
+  {
+    src: "/images/lore3.jpg",
+    alt: "Remy Leo Origin Panel 3",
+    caption: "A glimpse into the survival-adaptive force field.",
+  },
+  {
+    src: "/images/lore4.jpg",
+    alt: "Remy Leo Origin Panel 4",
+    caption: "Thrown back through time, stranded in a new world.",
+  },
+  {
+    src: "/images/lore5.jpg",
+    alt: "Remy Leo Origin Panel 5",
+    caption: "The force field mimics attacks to protect and empower.",
+  },
+  {
+    src: "/images/lore6.jpg",
+    alt: "Remy Leo Origin Panel 6",
+    caption: "The hidden message behind the Remy Leo apparel.",
+  },
+];
 
 export default function LorePage() {
-  const router = useRouter(); // ✅ FIXED
-
   return (
     <>
-      <Head>
-        <title>Remy Leo: Origin Files</title>
-        <meta
-          name="description"
-          content="Explore the origin of Remy Leo through immersive storytelling and visuals."
-        />
-      </Head>
       <Navbar />
-      
-      <main className="min-h-screen bg-[#0E0E0E] text-white px-6 py-12">
-        <motion.h1
-          className="text-4xl md:text-5xl font-bold text-center text-[#D4AF37] mb-10"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-          REMY LEO: ORIGIN FILES
-        </motion.h1>
+      <main className="min-h-screen bg-[#0E0E0E] text-white px-6 py-10">
+        <h1 className="text-5xl font-bold text-[#D4AF37] mb-12 text-center">
+          Remy Leo Origin Story
+        </h1>
 
         <section className="max-w-4xl mx-auto space-y-20">
-          {[ /* Panels... */ ].map((panel, index) => (
+          {panels.map((panel, index) => (
             <div key={index} className="space-y-6">
               <motion.div
                 className="relative w-full h-[28rem] rounded-2xl overflow-hidden shadow-xl"
@@ -44,6 +60,7 @@ export default function LorePage() {
                   alt={panel.alt}
                   fill
                   className="object-cover"
+                  priority={index === 0} // load first image with priority
                 />
               </motion.div>
               <motion.p
@@ -59,40 +76,7 @@ export default function LorePage() {
               </motion.p>
             </div>
           ))}
-
-          <motion.div
-            className="text-center pt-6"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 1 }}
-          >
-            <a
-              href="/clothing"
-              className="inline-block px-8 py-4 border border-[#D4AF37] text-[#D4AF37] rounded-2xl hover:bg-[#2f2f2f] transition-all"
-            >
-              Continue the Lore
-            </a>
-          </motion.div>
         </section>
-
-        {/* Footer */}
-        <footer className="w-full bg-[#111111] text-gray-200 text-sm text-center py-6 mt-12 border-t border-[#D4AF37]">
-          <div className="container mx-auto px-4">
-            <p>© {new Date().getFullYear()} Remy Leo. All rights reserved.</p>
-            <div className="mt-2 flex justify-center gap-6">
-              <button onClick={() => router.push("/studio")} className="hover:text-[#D4AF37] transition-colors">
-                Studio
-              </button>
-              <button onClick={() => router.push("/clothing")} className="hover:text-[#D4AF37] transition-colors">
-                Apparel
-              </button>
-              <button onClick={() => router.push("/lore")} className="hover:text-[#D4AF37] transition-colors">
-                Origin Story
-              </button>
-            </div>
-          </div>
-        </footer>
       </main>
     </>
   );
