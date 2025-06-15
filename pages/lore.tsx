@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 
 const panels = [
   {
-    src: "/images/lore1.jpg",
+    src: "/images/panel1.png",
     alt: "Remy Leo Origin Panel 1",
     caption: "The beginning of the journey in a future dystopia.",
   },
