@@ -63,7 +63,7 @@ export default function StudioPage() {
               <p className="text-lg text-gray-400">Starting at $999 – For startups and product launches.</p>
               <ul className="list-disc list-inside space-y-1 text-sm text-gray-300">
                 <li>Up to 6 Custom Pages</li>
-                <li>Frontend + Backend (MERN/Next.js)</li>
+                <li>Frontend + Backend</li>
                 <li>User Auth & Dashboard</li>
                 <li>Database + Analytics</li>
               </ul>
@@ -72,7 +72,7 @@ export default function StudioPage() {
 
             {/* Custom Web App */}
             <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 space-y-4">
-              <h3 className="text-2xl font-semibold">🚀 Custom Web App / SaaS</h3>
+              <h3 className="text-2xl font-semibold">🚀  Website </h3>
               <p className="text-lg text-gray-400">Inquire for Quote – Tailored builds for unique needs.</p>
               <ul className="list-disc list-inside space-y-1 text-sm text-gray-300">
                 <li>Booking / E-Commerce / AI</li>
@@ -91,7 +91,6 @@ export default function StudioPage() {
               <li>🎨 Logo + Brand Kit – $199</li>
               <li>🔧 Monthly Maintenance – $99/mo</li>
               <li>📬 Email/Newsletter Setup – $149</li>
-              <li>✍️ Copywriting – $100/page</li>
             </ul>
           </div>
         </section>
