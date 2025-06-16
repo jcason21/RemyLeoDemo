@@ -5,6 +5,7 @@ export const mockPlaylists = {
     genre: "Lo-Fi",
     mood: "Chill",
     createdBy: "alexg",
+    likedBy: ["user1", "user2", "user3"],
     tracks: Array.from({ length: 20 }, (_, i) => ({
       id: `lnv-track-${i + 1}`,
       title: `Lo-Fi Groove #${i + 1}`,
@@ -35,6 +36,7 @@ export const mockPlaylists = {
     genre: "Afrobeat",
     mood: "Uplifting",
     createdBy: "niad",
+    likedBy: ["user4", "user5"],
     tracks: Array.from({ length: 20 }, (_, i) => ({
       id: `as-track-${i + 1}`,
       title: `Soulful Heat #${i + 1}`,
@@ -52,11 +54,7 @@ export const mockPlaylists = {
           : i === 2
           ? ["Most Added"]
           : [],
-      sampleComments: [
-        "So soulful 🔥",
-        "Great rhythm",
-        "Sunday essential",
-      ],
+      sampleComments: ["So soulful 🔥", "Great rhythm", "Sunday essential"],
     })),
   },
   "3": {
@@ -65,6 +63,7 @@ export const mockPlaylists = {
     genre: "Hip-Hop",
     mood: "Energetic",
     createdBy: "kiaj",
+    likedBy: ["user2", "user3", "user6"],
     tracks: Array.from({ length: 20 }, (_, i) => ({
       id: `hype-track-${i + 1}`,
       title: `Energy Blast #${i + 1}`,
@@ -82,11 +81,7 @@ export const mockPlaylists = {
           : i === 2
           ? ["Most Added"]
           : [],
-      sampleComments: [
-        "Let's gooo 💥",
-        "Gym playlist certified",
-        "Beats crazy",
-      ],
+      sampleComments: ["Let's gooo 💥", "Gym playlist certified", "Beats crazy"],
     })),
   },
   "4": {
@@ -95,6 +90,7 @@ export const mockPlaylists = {
     genre: "Trap / R&B",
     mood: "Smooth",
     createdBy: "jayflow",
+    likedBy: ["user8"],
     tracks: Array.from({ length: 20 }, (_, i) => ({
       id: `od-track-${i + 1}`,
       title: `Wave Ride #${i + 1}`,
@@ -112,11 +108,7 @@ export const mockPlaylists = {
           : i === 2
           ? ["Most Added"]
           : [],
-      sampleComments: [
-        "Silky smooth",
-        "Drip overload 💧",
-        "R&B perfection",
-      ],
+      sampleComments: ["Silky smooth", "Drip overload 💧", "R&B perfection"],
     })),
   },
   "5": {
@@ -125,6 +117,7 @@ export const mockPlaylists = {
     genre: "Jazzhop",
     mood: "Mellow",
     createdBy: "melcafe",
+    likedBy: [],
     tracks: Array.from({ length: 20 }, (_, i) => ({
       id: `sc-track-${i + 1}`,
       title: `Warm Brew #${i + 1}`,
@@ -142,11 +135,7 @@ export const mockPlaylists = {
           : i === 2
           ? ["Most Added"]
           : [],
-      sampleComments: [
-        "Morning bliss ☕",
-        "Jazzhop heaven",
-        "Soft start to the day",
-      ],
+      sampleComments: ["Morning bliss ☕", "Jazzhop heaven", "Soft start to the day"],
     })),
   },
   "6": {
@@ -155,6 +144,7 @@ export const mockPlaylists = {
     genre: "Electronic",
     mood: "Trippy",
     createdBy: "zenon",
+    likedBy: ["user9", "user10"],
     tracks: Array.from({ length: 20 }, (_, i) => ({
       id: `cb-track-${i + 1}`,
       title: `Orbit Pulse #${i + 1}`,
@@ -172,11 +162,7 @@ export const mockPlaylists = {
           : i === 2
           ? ["Most Added"]
           : [],
-      sampleComments: [
-        "Trippy af 🚀",
-        "Headphones mandatory",
-        "Outer space energy",
-      ],
+      sampleComments: ["Trippy af 🚀", "Headphones mandatory", "Outer space energy"],
     })),
   },
 };
