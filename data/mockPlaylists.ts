@@ -1,3 +1,4 @@
+import { MockPlaylistsMap } from "../types"; 
 export const mockPlaylists = {
   "1": {
     id: "1",

@@ -1,3 +1,4 @@
+// pages/shyndig/user/[username].tsx
 import { useRouter } from "next/router";
 import Link from "next/link";
 import ShyndigNavbar from "../../../components/ShyndigNavbar";
@@ -7,12 +8,32 @@ export default function DynamicUserProfile() {
   const router = useRouter();
   const { username } = router.query;
 
-  if (!username || typeof username !== "string") return <p>Loading...</p>;
+  if (!username || typeof username !== "string") {
+    return (
+      <>
+        <ShyndigNavbar />
+        <main className="pt-24 px-6 max-w-4xl mx-auto text-center">
+          <p className="text-gray-600">Loading user profile...</p>
+        </main>
+      </>
+    );
+  }
 
   const user = mockUsers[username.toLowerCase()];
-  if (!user) return <p>User not found.</p>;
+  if (!user) {
+    return (
+      <>
+        <ShyndigNavbar />
+        <main className="pt-24 px-6 max-w-4xl mx-auto text-center text-red-600">
+          <h1 className="text-3xl font-bold">User Not Found</h1>
+          <p className="mt-4">Sorry, we couldn’t find a profile for @{username}.</p>
+        </main>
+      </>
+    );
+  }
 
-  const savedPlaylists = user.savedPlaylists || [];
+  const savedPlaylists = user.savedPlaylists ?? [];
+  const following = user.following ?? [];
 
   return (
     <>
@@ -22,8 +43,8 @@ export default function DynamicUserProfile() {
           {user.avatarUrl && (
             <img
               src={user.avatarUrl}
-              alt={user.displayName}
-              className="w-16 h-16 rounded-full object-cover"
+              alt={`${user.displayName}'s avatar`}
+              className="w-16 h-16 rounded-full object-cover border border-gray-300"
             />
           )}
           <div>
@@ -77,17 +98,17 @@ export default function DynamicUserProfile() {
         {/* Followers */}
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-2">Followers</h2>
-          <p>{user.followers} followers</p>
+          <p>{user.followers ?? 0} follower{(user.followers ?? 0) !== 1 ? "s" : ""}</p>
         </section>
 
         {/* Following */}
         <section>
           <h2 className="text-2xl font-semibold mb-2">Following</h2>
-          {user.following.length === 0 ? (
+          {following.length === 0 ? (
             <p className="text-gray-500">Not following anyone.</p>
           ) : (
             <ul className="list-disc list-inside">
-              {user.following.map((handle) => (
+              {following.map((handle) => (
                 <li key={handle}>
                   <Link
                     href={`/shyndig/user/${handle}`}
