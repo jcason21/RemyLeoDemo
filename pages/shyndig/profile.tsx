@@ -24,7 +24,7 @@ export default function UserProfile() {
   }
 
   const createdPlaylists = user.savedPlaylists
-    .map((id) => mockPlaylists[id])
+    .map((playlist) => mockPlaylists[playlist.id])
     .filter(Boolean);
 
   return (
