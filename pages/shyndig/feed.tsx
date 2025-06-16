@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ShyndigNavbar from "../../components/ShyndigNavbar";
-import CardPlaylist from "../../components/CardPlaylist";
+import CardPlaylist from "../../components/cardplaylist";
 import { mockPlaylists } from "../../data/mockPlaylists";
 
 export default function FeedPage() {
