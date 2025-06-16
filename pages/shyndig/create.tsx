@@ -1,242 +1,139 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+import Link from "next/link";
 import ShyndigNavbar from "../../components/ShyndigNavbar";
+import { generatePlaylistFromPreferences } from "../../lib/aiGenerator";
+import { mockUsers } from "../../data/mockUsers";
 
-const genres = ["Hip-Hop", "Lo-Fi", "Afrobeat", "Rock", "Jazz", "Pop"];
-const moods = ["Chill", "Energetic", "Romantic", "Sad", "Happy"];
-const tags = ["vibes", "workout", "study", "party", "relax"];
-
-const fakeArtists = [
-  "The Weeknd",
-  "J Cole",
-  "Billie Eilish",
-  "Doja Cat",
-  "Kendrick Lamar",
-  "Dua Lipa",
-  "Drake",
-  "SZA",
-  "Tyler, The Creator",
-  "Ariana Grande",
-];
-
-function generateFakeTrackTitle(genre: string, mood: string, tag: string) {
-  const adjectives = ["Electric", "Lost", "Vibin'", "Midnight", "Frozen"];
-  const nouns = ["Dreams", "Tempo", "Rhythm", "Glow", "Moonlight"];
-  return `${adjectives[Math.floor(Math.random() * adjectives.length)]} ${
-    nouns[Math.floor(Math.random() * nouns.length)]
-  }`;
-}
-
-function generateFakePlaylist({ genre, mood, tags }) {
-  const tag = tags[Math.floor(Math.random() * tags.length)] || "";
-  return Array.from({ length: 10 }, (_, i) => ({
-    id: i + 1,
-    title: generateFakeTrackTitle(genre, mood, tag),
-    artist: fakeArtists[Math.floor(Math.random() * fakeArtists.length)],
-  }));
-}
-
-export default function CreatePlaylistPage() {
-  const [selectedGenre, setSelectedGenre] = useState(genres[0]);
-  const [selectedMood, setSelectedMood] = useState(moods[0]);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+export default function CreatePage() {
   const [playlistName, setPlaylistName] = useState("");
-  const [generatedTracks, setGeneratedTracks] = useState(null);
-  const [isGenerating, setIsGenerating] = useState(false);
+  const [mood, setMood] = useState("Chill");
+  const [genre, setGenre] = useState("Hip-Hop");
+  const [tags, setTags] = useState(["vibes"]);
+  const [generatedTracks, setGeneratedTracks] = useState([]);
   const [showSaveModal, setShowSaveModal] = useState(false);
-  const [showShareModal, setShowShareModal] = useState(false);
-
-  useEffect(() => {
-    const lastPlaylist = localStorage.getItem("shyndig_last_playlist");
-    if (lastPlaylist) {
-      const { name, tracks } = JSON.parse(lastPlaylist);
-      setGeneratedTracks(tracks);
-      setPlaylistName(name);
-    }
-  }, []);
-
-  const toggleTag = (tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
-    );
-  };
 
   const handleGenerate = () => {
-    setIsGenerating(true);
-    setGeneratedTracks(null);
-    setTimeout(() => {
-      const newTracks = generateFakePlaylist({
-        genre: selectedGenre,
-        mood: selectedMood,
-        tags: selectedTags,
-      });
-      const name = playlistName || `${selectedMood} ${selectedGenre} Mix`;
-      setGeneratedTracks(newTracks);
-      setPlaylistName(name);
-      localStorage.setItem(
-        "shyndig_last_playlist",
-        JSON.stringify({ name, tracks: newTracks })
-      );
-      setIsGenerating(false);
-    }, 1000); // Simulate API delay
+    const playlist = generatePlaylistFromPreferences({ mood, genre, tags });
+    setGeneratedTracks(playlist);
+  };
+
+  const handleSave = () => {
+    const id = Math.random().toString(36).substring(2, 9);
+    const newPlaylist = {
+      id,
+      name: playlistName || `Untitled - ${new Date().toLocaleDateString()}`,
+      tracks: generatedTracks,
+    };
+
+    // Save to localStorage
+    localStorage.setItem(id, JSON.stringify(newPlaylist));
+
+    // Ensure mock guest user has a savedPlaylists array
+    const guest = mockUsers["guest"];
+    if (guest) {
+      if (!Array.isArray(guest.savedPlaylists)) {
+        guest.savedPlaylists = [];
+      }
+      guest.savedPlaylists.unshift(id);
+    }
+
+    setShowSaveModal(true);
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 font-sans">
+    <>
       <ShyndigNavbar />
-      <main className="pt-24 max-w-3xl mx-auto px-6 space-y-10">
-        <h1 className="text-4xl font-extrabold text-center text-pink-600">
-          Create AI-Generated Playlist
-        </h1>
+      <main className="pt-24 px-6 max-w-3xl mx-auto">
+        <h1 className="text-3xl font-bold mb-4">Create a New Playlist</h1>
 
-        {/* Input Form */}
-        <section className="bg-white shadow-md rounded-lg p-6 border border-gray-200">
-          <div className="space-y-6">
-            <div>
-              <label className="block mb-2 font-semibold text-gray-700">
-                Playlist Name (optional)
-              </label>
-              <input
-                type="text"
-                value={playlistName}
-                onChange={(e) => setPlaylistName(e.target.value)}
-                placeholder="e.g. Late Night Coding Mix"
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition"
-              />
-            </div>
-
-            <div>
-              <label className="block mb-2 font-semibold text-gray-700">Genre</label>
-              <select
-                value={selectedGenre}
-                onChange={(e) => setSelectedGenre(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition"
-              >
-                {genres.map((g) => (
-                  <option key={g}>{g}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block mb-2 font-semibold text-gray-700">Mood</label>
-              <select
-                value={selectedMood}
-                onChange={(e) => setSelectedMood(e.target.value)}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition"
-              >
-                {moods.map((m) => (
-                  <option key={m}>{m}</option>
-                ))}
-              </select>
-            </div>
-
-            <div>
-              <label className="block mb-2 font-semibold text-gray-700">Tags</label>
-              <div className="flex flex-wrap gap-3">
-                {tags.map((tag) => (
-                  <button
-                    key={tag}
-                    type="button"
-                    onClick={() => toggleTag(tag)}
-                    className={`px-4 py-1 rounded-full border text-sm font-medium transition ${
-                      selectedTags.includes(tag)
-                        ? "bg-pink-600 border-pink-600 text-white shadow-md"
-                        : "bg-gray-100 border-gray-300 text-gray-700 hover:bg-pink-50"
-                    }`}
-                  >
-                    #{tag}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Generate Button */}
-        <div>
-          <button
-            onClick={handleGenerate}
-            disabled={isGenerating}
-            className={`w-full py-3 rounded-md text-white font-semibold transition ${
-              isGenerating
-                ? "bg-pink-300 cursor-not-allowed"
-                : "bg-pink-600 hover:bg-pink-700 shadow-lg"
-            }`}
-          >
-            {isGenerating ? "Generating..." : "Generate Playlist"}
-          </button>
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-1">Playlist Name</label>
+          <input
+            type="text"
+            value={playlistName}
+            onChange={(e) => setPlaylistName(e.target.value)}
+            className="w-full border px-3 py-2 rounded-md"
+            placeholder="Late Night Vibes"
+          />
         </div>
 
-        {/* Playlist Display */}
-        {generatedTracks && !isGenerating && (
-          <section className="bg-white shadow-md rounded-lg p-6 border border-gray-200">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">{playlistName}</h2>
-            <ul className="divide-y divide-gray-200">
+        <div className="flex gap-4 mb-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">Mood</label>
+            <select
+              value={mood}
+              onChange={(e) => setMood(e.target.value)}
+              className="border px-3 py-2 rounded-md text-gray-900 bg-white"
+            >
+              <option>Chill</option>
+              <option>Energetic</option>
+              <option>Romantic</option>
+              <option>Sad</option>
+              <option>Happy</option>
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Genre</label>
+            <select
+              value={genre}
+              onChange={(e) => setGenre(e.target.value)}
+              className="border px-3 py-2 rounded-md text-gray-900 bg-white"
+            >
+              <option>Hip-Hop</option>
+              <option>Lo-Fi</option>
+              <option>Afrobeat</option>
+              <option>Pop</option>
+              <option>Jazz</option>
+              <option>Rock</option>
+            </select>
+          </div>
+        </div>
+
+        <button
+          onClick={handleGenerate}
+          className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
+        >
+          Generate Playlist
+        </button>
+
+        {generatedTracks.length > 0 && (
+          <section className="mt-8">
+            <h2 className="text-xl font-semibold mb-2">Generated Tracks</h2>
+            <ul className="divide-y divide-gray-200 bg-white rounded-md border">
               {generatedTracks.map((track) => (
-                <li
-                  key={track.id}
-                  className="py-3 flex justify-between items-center hover:bg-pink-50 rounded px-3 transition"
-                >
+                <li key={track.id} className="flex justify-between py-2 px-3 text-sm">
                   <span className="font-medium text-gray-900">{track.title}</span>
                   <span className="text-gray-500">{track.artist}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="mt-6 flex gap-4">
-              <button
-                onClick={() => setShowSaveModal(true)}
-                className="flex-1 py-2 rounded-md bg-green-600 text-white font-semibold hover:bg-green-700 transition shadow"
-              >
-                Save to Profile
-              </button>
-              <button
-                onClick={() => setShowShareModal(true)}
-                className="flex-1 py-2 rounded-md bg-indigo-600 text-white font-semibold hover:bg-indigo-700 transition shadow"
-              >
-                Share Playlist
-              </button>
-            </div>
+            <button
+              onClick={handleSave}
+              className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+            >
+              Save Playlist
+            </button>
           </section>
         )}
 
-        {/* Save Modal */}
         {showSaveModal && (
-          <Modal title="Saved!" onClose={() => setShowSaveModal(false)}>
-            Your playlist has been saved to your profile (fake save).
-          </Modal>
-        )}
-
-        {/* Share Modal */}
-        {showShareModal && (
-          <Modal title="Share This Playlist" onClose={() => setShowShareModal(false)}>
-            <p>Here’s your link:</p>
-            <code className="block mt-2 bg-gray-100 p-3 rounded text-sm font-mono select-all">
-              https://shyndig.app/p/12345
-            </code>
-          </Modal>
+          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+            <div className="bg-white p-6 rounded-lg shadow-md text-center">
+              <h2 className="text-lg font-semibold mb-2">Playlist Saved!</h2>
+              <p className="text-sm mb-4">
+                You can view it in your profile.
+              </p>
+              <Link
+                href="/shyndig/user/guest"
+                className="inline-block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
+              >
+                Go to Profile
+              </Link>
+            </div>
+          </div>
         )}
       </main>
-    </div>
-  );
-}
-
-// ————————————————————————
-// 🔹 Modal Component
-function Modal({ title, children, onClose }) {
-  return (
-    <div className="fixed inset-0 bg-black bg-opacity-30 z-50 flex items-center justify-center px-4">
-      <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md relative">
-        <h3 className="text-xl font-bold mb-3 text-pink-600">{title}</h3>
-        <div className="text-gray-700">{children}</div>
-        <button
-          className="absolute top-3 right-3 text-gray-400 hover:text-pink-600 text-xl font-bold"
-          onClick={onClose}
-          aria-label="Close modal"
-        >
-          &times;
-        </button>
-      </div>
-    </div>
+    </>
   );
 }

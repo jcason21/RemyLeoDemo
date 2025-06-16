@@ -1,17 +1,10 @@
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import ShyndigNavbar from "../../components/ShyndigNavbar";
-import {
-  Heart,
-  MessageCircle,
-  Share2,
-  Link2,
-  BadgeCheck,
-} from "lucide-react";
+import CardPlaylist from "../../components/CardPlaylist";
 import { mockPlaylists } from "../../data/mockPlaylists";
 
 export default function FeedPage() {
-  const [tab, setTab] = useState("following");
+  const [tab, setTab] = useState("trending");
   const [likes, setLikes] = useState<Record<string, number>>({});
   const [following, setFollowing] = useState<string[]>([]);
   const [commentingOn, setCommentingOn] = useState<string | null>(null);
@@ -20,6 +13,18 @@ export default function FeedPage() {
   const [toast, setToast] = useState("");
 
   const playlists = Object.values(mockPlaylists);
+
+  // Auto-follow first 2 playlists on load
+  useEffect(() => {
+    setFollowing(playlists.slice(0, 2).map((pl) => pl.id));
+  }, []);
+
+  const filteredPlaylists =
+    tab === "following"
+      ? following.length > 0
+        ? playlists.filter((pl) => following.includes(pl.id))
+        : playlists
+      : playlists;
 
   const handleLike = (id: string) => {
     setLikes((prev) => ({ ...prev, [id]: (prev[id] || 0) + 1 }));
@@ -32,7 +37,7 @@ export default function FeedPage() {
   };
 
   const handleShare = (playlist: any) => {
-    alert(`Shared ${playlist.name}`);
+    alert(`Shared ${playlist.title}`);
   };
 
   const openCommentModal = (id: string) => {
@@ -61,113 +66,37 @@ export default function FeedPage() {
       <main className="max-w-2xl mx-auto p-6">
         <h1 className="text-3xl font-bold mb-6">Your Feed</h1>
 
+        {/* Tabs */}
         <div className="flex gap-4 mb-8">
-          <button
-            onClick={() => setTab("following")}
-            className={`px-4 py-2 rounded ${
-              tab === "following"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            Following
-          </button>
-          <button
-            onClick={() => setTab("trending")}
-            className={`px-4 py-2 rounded ${
-              tab === "trending"
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-            }`}
-          >
-            Trending
-          </button>
+          {["following", "trending"].map((t) => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`px-4 py-2 rounded ${
+                tab === t
+                  ? "bg-blue-600 text-white"
+                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+              }`}
+            >
+              {t[0].toUpperCase() + t.slice(1)}
+            </button>
+          ))}
         </div>
 
-        {playlists.map((pl) => (
-          <div
-            key={pl.id}
-            className="border rounded-lg shadow-sm p-4 mb-6 bg-white"
-          >
-            <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-full bg-blue-200" />
-              <div>
-                <p className="font-semibold text-gray-800 flex items-center gap-2">
-                  {pl.name} <BadgeCheck className="w-4 h-4 text-blue-500" />
-                </p>
-                <p className="text-sm text-gray-500">{pl.description}</p>
-              </div>
-            </div>
+        {/* Feed Posts using CardPlaylist */}
+        {filteredPlaylists.map((pl) => (
+          <CardPlaylist
+  key={pl.id}
+  playlist={pl}
+  likesCount={(pl.likedBy?.length || 0) + (likes[pl.id] || 0)}
+  isFollowing={following.includes(pl.id)}
+  commentsCount={comments[pl.id]?.length || 0}
+  onLike={handleLike}
+  onFollow={handleFollow}
+  onShare={handleShare}
+  onOpenComments={openCommentModal}
+/>
 
-            <Link href={`/playlist/${pl.id}`}>
-              <div className="aspect-video bg-gray-200 mb-3 rounded-md cursor-pointer hover:opacity-80 transition" />
-            </Link>
-
-            <p className="text-sm text-gray-600 mb-2">
-              {pl.tracks.length} tracks · {pl.likedBy.length + (likes[pl.id] || 0)} likes
-            </p>
-
-            <div className="flex justify-between items-center mt-4 text-gray-500">
-              <div className="flex gap-6">
-                <button
-                  onClick={() => handleLike(pl.id)}
-                  className="flex items-center gap-1 hover:text-red-500"
-                >
-                  <Heart className="w-5 h-5" />
-                  {pl.likedBy.length + (likes[pl.id] || 0)}
-                </button>
-
-                <button
-                  onClick={() => openCommentModal(pl.id)}
-                  className="flex items-center gap-1 hover:text-blue-500"
-                >
-                  <MessageCircle className="w-5 h-5" />
-                  Comment
-                </button>
-
-                <button
-                  onClick={() => handleFollow(pl.id)}
-                  className="text-sm text-blue-600 font-semibold hover:underline"
-                >
-                  {following.includes(pl.id) ? "Following" : "Follow"}
-                </button>
-              </div>
-
-              <div className="flex gap-4">
-                <button
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      `${window.location.origin}/playlist/${pl.id}`
-                    )
-                  }
-                  title="Copy Link"
-                  className="hover:text-green-500"
-                >
-                  <Link2 className="w-5 h-5" />
-                </button>
-
-                <button
-                  onClick={() => handleShare(pl)}
-                  title="Share Playlist"
-                  className="hover:text-purple-500"
-                >
-                  <Share2 className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Comments */}
-            {comments[pl.id]?.length > 0 && (
-              <div className="mt-4 border-t pt-4">
-                <p className="text-sm font-semibold mb-2">Comments:</p>
-                {comments[pl.id].map((comment, idx) => (
-                  <p key={idx} className="text-sm text-gray-700 mb-1">
-                    💬 {comment}
-                  </p>
-                ))}
-              </div>
-            )}
-          </div>
         ))}
 
         {/* Comment Modal */}

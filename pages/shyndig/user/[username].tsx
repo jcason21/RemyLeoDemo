@@ -1,97 +1,103 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { mockUsers } from "../../../data/mockUsers";
-import { mockPlaylists } from "../../../data/mockPlaylists";
 import Link from "next/link";
 import ShyndigNavbar from "../../../components/ShyndigNavbar";
+import { mockUsers } from "../../../data/mockUsers";
 
-export default function UserProfilePage() {
+export default function DynamicUserProfile() {
   const router = useRouter();
   const { username } = router.query;
 
-  if (!username || typeof username !== "string") return <div>Loading...</div>;
+  if (!username || typeof username !== "string") return <p>Loading...</p>;
 
   const user = mockUsers[username.toLowerCase()];
-  if (!user) return <div>User not found</div>;
+  if (!user) return <p>User not found.</p>;
 
-  const savedPlaylists = (user.savedPlaylists || [])
-    .map((p) => (typeof p === "string" ? mockPlaylists[p] : p))
-    .filter(Boolean);
-
-  const [profilePic, setProfilePic] = useState<string>(user.avatarUrl);
-  const [badges] = useState(["Top Listener", "Chill Vibes", "Early Adopter"]);
-
-  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const result = event.target?.result;
-        if (typeof result === "string") setProfilePic(result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  const savedPlaylists = user.savedPlaylists || [];
 
   return (
     <>
       <ShyndigNavbar />
-      <main className="pt-24 max-w-xl mx-auto px-6">
-        {/* Profile Header */}
-        <section className="flex items-center space-x-6 mb-10">
-          <div className="relative">
+      <main className="pt-24 px-6 max-w-4xl mx-auto">
+        <div className="flex items-center gap-4 mb-6">
+          {user.avatarUrl && (
             <img
-              src={profilePic}
-              alt={`${user.displayName} avatar`}
-              className="w-28 h-28 rounded-full object-cover border-4 border-white shadow-md"
+              src={user.avatarUrl}
+              alt={user.displayName}
+              className="w-16 h-16 rounded-full object-cover"
             />
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className="mt-2 text-sm cursor-pointer"
-              title="Change profile picture"
-            />
+          )}
+          <div>
+            <h1 className="text-4xl font-bold">{user.displayName}</h1>
+            <p className="text-gray-600">{user.bio}</p>
           </div>
-          <div className="flex-1">
-            <h1 className="text-4xl font-extrabold text-gray-900">{user.displayName}</h1>
-            <p className="text-indigo-600 text-lg mt-1">@{user.username}</p>
-            <p className="mt-4 text-gray-700 leading-relaxed">{user.bio}</p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              {badges.map((badge) => (
-                <span
-                  key={badge}
-                  className="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full text-xs font-semibold"
-                >
-                  {badge}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
+        </div>
 
         {/* Saved Playlists */}
-        <section>
-          <h2 className="text-2xl font-semibold mb-6">Saved Playlists</h2>
-          {savedPlaylists.length > 0 ? (
-            <ul className="grid gap-5 md:grid-cols-2">
+        <section className="mb-12">
+          <h2 className="text-2xl font-semibold mb-4">Saved Playlists</h2>
+          {savedPlaylists.length === 0 ? (
+            <p className="text-gray-500">No playlists saved yet.</p>
+          ) : (
+            <div className="space-y-6">
               {savedPlaylists.map((playlist) => (
-                <li key={playlist.id}>
+                <div
+                  key={playlist.id}
+                  className="border border-gray-200 rounded-xl p-4 shadow-sm bg-white"
+                >
+                  <div className="flex justify-between items-center mb-2">
+                    <h3 className="text-xl font-bold text-pink-600">
+                      {playlist.name}
+                    </h3>
+                    <Link
+                      href={`/shyndig/playlist/${playlist.id}`}
+                      className="text-sm text-indigo-600 hover:underline"
+                    >
+                      View Full →
+                    </Link>
+                  </div>
+                  <ul className="divide-y divide-gray-100">
+                    {playlist.tracks?.slice(0, 6).map((track) => (
+                      <li
+                        key={track.id}
+                        className="py-2 flex justify-between text-sm"
+                      >
+                        <span className="font-medium text-gray-900">
+                          {track.title}
+                        </span>
+                        <span className="text-gray-500">{track.artist}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
+
+        {/* Followers */}
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-2">Followers</h2>
+          <p>{user.followers} followers</p>
+        </section>
+
+        {/* Following */}
+        <section>
+          <h2 className="text-2xl font-semibold mb-2">Following</h2>
+          {user.following.length === 0 ? (
+            <p className="text-gray-500">Not following anyone.</p>
+          ) : (
+            <ul className="list-disc list-inside">
+              {user.following.map((handle) => (
+                <li key={handle}>
                   <Link
-                    href={`/shyndig/playlist/${playlist.id}`}
-                    className="block bg-white rounded-xl shadow-md p-5 hover:shadow-xl transition-shadow"
+                    href={`/shyndig/user/${handle}`}
+                    className="text-blue-600 hover:underline"
                   >
-                    <h3 className="text-xl font-bold text-gray-900">{playlist.name}</h3>
-                    <p className="text-gray-500 mt-1">{playlist.description}</p>
-                    <p className="mt-3 text-sm text-gray-400">
-                      {playlist.tracks.length} track{playlist.tracks.length !== 1 ? "s" : ""}
-                    </p>
+                    @{handle}
                   </Link>
                 </li>
               ))}
             </ul>
-          ) : (
-            <p className="text-gray-500">No saved playlists yet.</p>
           )}
         </section>
       </main>
