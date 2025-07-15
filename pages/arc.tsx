@@ -1,7 +1,10 @@
 import React, { useState, useRef } from "react";
 import Navbar from "../components/Navbar";
+import { useRouter } from "next/router";
+
 
 export default function ArcPage() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [name, setName] = useState("");
