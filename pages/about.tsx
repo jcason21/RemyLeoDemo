@@ -16,7 +16,7 @@ export default function AboutPage() {
           <section>
             <h2 className="text-3xl font-semibold text-[#D4AF37] mb-4">Mission</h2>
             <p className="text-gray-300 text-lg leading-relaxed">
-              At Remy Leo, our mission is to fuse cutting-edge technology with bold fashion to create wearable stories that empower and protect. We build innovative MVPs and prototypes for small to medium businesses, while designing apparel that carries a powerful narrative and functional durability.
+              At Remy Leo, our mission is to fuse cutting-edge technology with bold fashion to create wearable stories that empower, protect, and inspire. We design apparel that carries purpose and build digital tools to help visionaries launch their ideas into the world.
             </p>
           </section>
 
@@ -24,19 +24,46 @@ export default function AboutPage() {
           <section>
             <h2 className="text-3xl font-semibold text-[#D4AF37] mb-4">Vision</h2>
             <p className="text-gray-300 text-lg leading-relaxed">
-              We envision a future where technology and fashion are inseparable, where clothing is not just worn but experienced. Remy Leo aims to lead this revolution by delivering smart, stylish, and resilient apparel combined with digital innovation that inspires communities and drives new possibilities.
+              We envision a future where technology and fashion are inseparable—where clothing is experienced as an extension of your story. Remy Leo aims to lead this movement by delivering smart, resilient apparel and digital innovation that spark creativity and new possibilities.
             </p>
           </section>
 
-          {/* Roadmap */}
+          {/* Rollout & Milestones */}
           <section>
-            <h2 className="text-3xl font-semibold text-[#D4AF37] mb-4">Roadmap</h2>
-            <ul className="list-disc list-inside text-gray-300 space-y-2">
-              <li>2025 Q2: Launch of first wearable tech collection - The Guardian Vest</li>
-              <li>2025 Q3: Expand digital MVP & prototype services for small to medium businesses</li>
-              <li>2025 Q4: Develop companion mobile app for wearable tech interaction and updates</li>
-              <li>2026 Q1: Introduce AI-powered customization and smart fabric integration</li>
-              <li>2026 Q2: Build community platform for customers and creators to share stories and designs</li>
+            <h2 className="text-3xl font-semibold text-[#D4AF37] mb-4">Rollout & Milestones</h2>
+            <ul className="list-disc list-inside text-gray-300 space-y-3">
+              <li>
+                <strong>August 2025:</strong> Preorder launch of the first wearable tech collection:
+                <ul className="list-disc list-inside ml-6 space-y-1">
+                  <li><em>The Guardian Vest</em> – advanced protective outerwear blending performance and story.</li>
+                  <li><em>The Signal Hoodie</em> – lightweight smart fabric hoodie for everyday adaptability.</li>
+                  <li><em>The Phase Shift Tee</em> – engineered for comfort, durability, and responsive design.</li>
+                </ul>
+              </li>
+              <li>
+                <strong>August 2025:</strong> Submission of Y Combinator application to secure funding and mentorship for scaling wearable technology and digital innovation.
+              </li>
+              <li>
+                <strong>September 2025:</strong> Public release of the <em>A.R.C.</em> (Automated Resource Creator), empowering creators and small businesses to generate custom project roadmaps, proposals, and brand assets instantly.
+              </li>
+              <li>
+                <strong>September 2025:</strong> Shyndig MVP fully available, providing an interactive platform for collaborative playlist creation, event music curation, and social engagement.
+              </li>
+              <li>
+                <strong>October 2025:</strong> Expansion of digital MVP and prototype services to help founders and brands launch quickly.
+              </li>
+              <li>
+                <strong>December 2025:</strong> Launch of the Remy Leo Companion App, connecting wearables with real-time updates, customization, and community features.
+              </li>
+              <li>
+                <strong>February 2026:</strong> AI-powered apparel customization platform for designing unique garments with adaptive smart fabrics.
+              </li>
+              <li>
+                <strong>April 2026:</strong> Community hub launch to bring together customers, designers, and storytellers to co-create and share their visions.
+              </li>
+              <li>
+                <strong>Summer 2026:</strong> Special Edition Capsule inspired by the Remy Leo Universe—wearable art meets interactive storytelling.
+              </li>
             </ul>
           </section>
 
@@ -52,10 +79,10 @@ export default function AboutPage() {
               <div className="max-w-xl text-center md:text-left">
                 <h3 className="text-xl font-semibold mb-2">J Cason</h3>
                 <p className="text-gray-300 mb-4">
-                  Founder &amp; Creative Director of Remy Leo. With a passion for blending technology and fashion, J leads the vision of creating innovative wearable tech and digital experiences that tell unique stories.
+                  Founder &amp; Creative Director of Remy Leo. Driven by a passion to blend innovation with style, J leads the mission to create wearable tech and digital experiences that tell powerful stories.
                 </p>
                 <p className="text-gray-400 italic">
-                  “Remy Leo is more than a brand; it’s a future stitched with purpose and crafted with care.”
+                  “Remy Leo isn’t just a brand—it’s a movement to design the future we want to live in.”
                 </p>
               </div>
             </div>

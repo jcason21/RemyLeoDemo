@@ -40,13 +40,13 @@ export default function StudioPage() {
         {/* Updated What I Offer Section with pricing & packages */}
         <section className="mb-16 max-w-5xl mx-auto">
           <h2 className="text-3xl font-bold text-[#D4AF37] mb-8 text-center">
-            💼 What I Offer
+             What I Offer
           </h2>
 
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             {/* Starter Brand Site */}
             <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 space-y-4">
-              <h3 className="text-2xl font-semibold">🔹 Starter Brand Site</h3>
+              <h3 className="text-2xl font-semibold"> Starter Brand Site</h3>
               <p className="text-lg text-gray-400">$499 – Perfect for solo creators or simple portfolios.</p>
               <ul className="list-disc list-inside space-y-1 text-sm text-gray-300">
                 <li>1–3 Responsive Pages</li>
@@ -59,7 +59,7 @@ export default function StudioPage() {
 
             {/* MVP Launch Package */}
             <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 space-y-4">
-              <h3 className="text-2xl font-semibold">⚡ MVP Launch Package</h3>
+              <h3 className="text-2xl font-semibold"> MVP Launch Package</h3>
               <p className="text-lg text-gray-400">Starting at $999 – For startups and product launches.</p>
               <ul className="list-disc list-inside space-y-1 text-sm text-gray-300">
                 <li>Up to 6 Custom Pages</li>
@@ -72,7 +72,7 @@ export default function StudioPage() {
 
             {/* Custom Web App */}
             <div className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 space-y-4">
-              <h3 className="text-2xl font-semibold">🚀  Website </h3>
+              <h3 className="text-2xl font-semibold">  Website </h3>
               <p className="text-lg text-gray-400">Inquire for Quote – Tailored builds for unique needs.</p>
               <ul className="list-disc list-inside space-y-1 text-sm text-gray-300">
                 <li>Booking / E-Commerce / AI</li>
@@ -86,11 +86,11 @@ export default function StudioPage() {
 
           {/* Add-ons */}
           <div className="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
-            <h4 className="text-xl font-semibold mb-2">✨ Add-Ons</h4>
+            <h4 className="text-xl font-semibold mb-2"> Add-Ons</h4>
             <ul className="grid gap-1 text-sm text-gray-300 sm:grid-cols-2 md:grid-cols-4">
-              <li>🎨 Logo + Brand Kit – $199</li>
-              <li>🔧 Monthly Maintenance – $99/mo</li>
-              <li>📬 Email/Newsletter Setup – $149</li>
+              <li> Logo + Brand Kit – $199</li>
+              <li> Monthly Maintenance – $99/mo</li>
+              <li> Email/Newsletter Setup – $149</li>
             </ul>
           </div>
         </section>

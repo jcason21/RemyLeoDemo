@@ -5,7 +5,7 @@ import { useMockUser } from "../../lib/mockUser";
 const mockUserPrefs = {
   nia: ["afrobeats", "neo-soul", "r&b"],
   dex: ["trap", "r&b", "lofi"],
-  vibeSeeker: ["lofi", "neo-soul", "r&b"], // Added to match mockUser
+  vibeSeeker: ["lofi", "neo-soul", "r&b"],
 };
 
 function generateSharedPlaylist(user1: string, user2: string) {
@@ -38,27 +38,43 @@ function generateSharedPlaylist(user1: string, user2: string) {
 export default function MessagesPage() {
   const user = useMockUser();
   const currentUser = user.username.toLowerCase();
+  const [messages, setMessages] = useState<any[]>([]);
 
-  const [messages, setMessages] = useState([
-    {
-      id: 1,
-      sender: "nia",
-      text: "Hey! What should we vibe to today?",
-      time: "2h ago",
-    },
-    {
-      id: 2,
-      sender: currentUser,
-      text: "Let me ask the AI…",
-      time: "1h 50m ago",
-    },
-    {
-      id: 3,
-      sender: "ai",
-      playlist: generateSharedPlaylist("nia", currentUser),
-      time: "1h 49m ago",
-    },
-  ]);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("shyndig-messages");
+      if (saved) {
+        setMessages(JSON.parse(saved));
+      } else {
+        setMessages([
+          {
+            id: 1,
+            sender: "nia",
+            text: "Hey! What should we vibe to today?",
+            time: "2h ago",
+          },
+          {
+            id: 2,
+            sender: currentUser,
+            text: "Let me ask the AI…",
+            time: "1h 50m ago",
+          },
+          {
+            id: 3,
+            sender: "ai",
+            playlist: generateSharedPlaylist("nia", currentUser),
+            time: "1h 49m ago",
+          },
+        ]);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && messages.length > 0) {
+      localStorage.setItem("shyndig-messages", JSON.stringify(messages));
+    }
+  }, [messages]);
 
   return (
     <>
@@ -84,10 +100,8 @@ export default function MessagesPage() {
                       : "bg-gray-100"
                   }`}
                 >
-                  {/* Text message */}
                   {msg.text && <p className="mb-2">{msg.text}</p>}
 
-                  {/* Playlist card */}
                   {msg.playlist && (
                     <div className="bg-white border rounded-lg p-3 shadow hover:shadow-md transition">
                       <div className="flex gap-4">
@@ -97,9 +111,7 @@ export default function MessagesPage() {
                           className="w-16 h-16 rounded object-cover"
                         />
                         <div>
-                          <h3 className="font-semibold">
-                            {msg.playlist.name}
-                          </h3>
+                          <h3 className="font-semibold">{msg.playlist.name}</h3>
                           <p className="text-sm text-gray-600">
                             {msg.playlist.description}
                           </p>
@@ -111,7 +123,6 @@ export default function MessagesPage() {
                     </div>
                   )}
 
-                  {/* Timestamp */}
                   <p className="text-xs text-gray-500 mt-2 text-right">
                     {msg.time}
                   </p>
