@@ -35,11 +35,14 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menu */}
       {isOpen && (
-        <div className="md:hidden px-6 pb-4 space-y-2">
-          <Link href="/clothing" className="block hover:text-[#D4AF37]">Clothing</Link>
-          <Link href="/preorder" className="block hover:text-[#D4AF37]">Preorder</Link>
-          <Link href="/lore" className="block hover:text-[#D4AF37]">Lore</Link>
-        </div>
+         <div className="md:hidden px-6 pb-4 space-y-2">
+    <Link href="/about" className="block hover:text-[#D4AF37]">About</Link>
+    <Link href="/arc" className="block hover:text-[#D4AF37]">A.R.C (coming soon)</Link>
+    <Link href="/clothing" className="block hover:text-[#D4AF37]">Clothing</Link>
+    <Link href="/lore" className="block hover:text-[#D4AF37]">Lore</Link>
+    <Link href="/studio" className="block hover:text-[#D4AF37]">Studio</Link>
+  </div>
+
       )}
     </nav>
   );
